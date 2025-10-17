@@ -29,12 +29,19 @@ reading = sensor_temp.read_u16() * conversion_factor
 # Typically, Vbe = 0.706V at 27 degrees C, with a slope of -1.721mV (0.001721) per degree.
 temperature = 27 - (reading - 0.706)/0.001721
 
-print("Temperature:", temperature, "°C")
-print("Board ID:", machine.unique_id())
-print("Processor:", sys.platform)
-print("MicroPython Version:", sys.version)
+def print_color_blocks():
+    BLOCK = '   '  # Or '\u2588' * 3 for solid blocks
+    # Standard colors
+    print(''.join(f"\033[4{i}m{BLOCK}\033[0m" for i in range(8)))
+
 print("Board Variant:", os.uname().machine)
-print("CPU Frequency:", machine.freq())
-print("Allocated RAM:", gc.mem_alloc())
-print("Free RAM:", gc.mem_free())
+print("Board ID:", machine.unique_id())
+print("Platform:", sys.platform)
+print("Firmware Version:", sys.version)
+print(f"Temperature: {temperature:.2f} °C")
+print("CPU Frequency:", machine.freq() // 1000000, "MHz")
+print(f"Allocated RAM: {gc.mem_alloc() / 1024:.2f} KB")
+print(f"Free RAM: {gc.mem_free() / 1024:.2f} KB")
 print("Reset Cause:", machine.reset_cause())
+print()
+print_color_blocks()
