@@ -5,7 +5,6 @@ import utime
 import sys
 import os
 import micropython
-import rp2
 import gc
 
 # Switch the pico on-board led on.
@@ -29,6 +28,7 @@ reading = sensor_temp.read_u16() * conversion_factor
 # The temperature sensor measures the Vbe voltage of a biased bipolar diode, connected to the fifth ADC channel
 # Typically, Vbe = 0.706V at 27 degrees C, with a slope of -1.721mV (0.001721) per degree.
 temperature = 27 - (reading - 0.706)/0.001721
+
 print("Temperature:", temperature, "°C")
 print("Board ID:", machine.unique_id())
 print("Processor:", sys.platform)
@@ -36,4 +36,5 @@ print("MicroPython Version:", sys.version)
 print("Board Variant:", os.uname().machine)
 print("CPU Frequency:", machine.freq())
 print("Allocated RAM:", gc.mem_alloc())
-print("Free RAM: ", gc.mem_free())
+print("Free RAM:", gc.mem_free())
+print("Reset Cause:", machine.reset_cause())
