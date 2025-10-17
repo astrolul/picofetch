@@ -12,13 +12,13 @@ led = Pin("LED", Pin.OUT)
 led.value(1)
 
 # Print ASCII Art
-print(r"""
+print('\033[1m' + r"""
 PPPP  III  CCC   OOO  FFFFF EEEEE TTTTT  CCC  H   H 
 P   P  I  C   C O   O F     E       T   C   C H   H 
 PPPP   I  C     O   O FFFF  EEEE    T   C     HHHHH 
 P      I  C   C O   O F     E       T   C   C H   H 
 P     III  CCC   OOO  F     EEEEE   T    CCC  H   H 
----------------------------------------------------""")
+---------------------------------------------------""" + '\033[0m')
 
 sensor_temp = machine.ADC(4)
 conversion_factor = 3.3 / (65535)
@@ -36,27 +36,27 @@ def print_color_blocks():
 
 cause = machine.reset_cause()
 
-print("Board Variant:", os.uname().machine)
-print("Board ID:", machine.unique_id())
-print("Platform:", sys.platform)
-print("Firmware Version:", sys.version)
-print(f"Temperature: {temperature:.2f} °C")
-print("CPU Frequency:", machine.freq() // 1000000, "MHz")
-print(f"Allocated RAM: {gc.mem_alloc() / 1024:.2f} KB")
-print(f"Free RAM: {gc.mem_free() / 1024:.2f} KB")
+print('\033[1m' + "Board Variant:" + '\033[0m', os.uname().machine)
+print('\033[1m' + "Board ID:" + '\033[0m', machine.unique_id())
+print('\033[1m' + "Platform:" + '\033[0m', sys.platform)
+print('\033[1m' + "Firmware Version:" + '\033[0m', sys.version)
+print(f"\033[1mTemperature:\033[0m {temperature:.2f} °C")
+print('\033[1m' + "CPU Frequency:" + '\033[0m', machine.freq() // 1000000, "MHz")
+print(f"\033[1mAllocated RAM:\033[0m {gc.mem_alloc() / 1024:.2f} KB")
+print(f"\033[1mFree RAM:\033[0m {gc.mem_free() / 1024:.2f} KB")
 
 if cause == machine.PWRON_RESET:
-    print("Reset Cause:", "PWRON_RESET")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "PWRON_RESET")
 elif cause == machine.WDT_RESET:
-    print("Reset Cause:", "WDT_RESET")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "WDT_RESET")
 elif cause == machine.DEEPSLEEP_RESET:
-    print("Reset Cause:", "DEEPSLEEP_RESET")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "DEEPSLEEP_RESET")
 elif cause == machine.SOFT_RESET:
-    print("Reset Cause:", "SOFT_RESET")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "SOFT_RESET")
 elif cause == machine.HARD_RESET:
-    print("Reset Cause:", "HARD_RESET")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "HARD_RESET")
 else:
-    print("Reset Cause:", "N/A")
+    print('\033[1m' + "Reset Cause:" + '\033[0m', "N/A")
 
 print()
 print_color_blocks()
