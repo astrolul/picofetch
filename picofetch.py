@@ -2,6 +2,11 @@
 import machine
 from machine import Pin
 import utime
+import sys
+import os
+import micropython
+import rp2
+import gc
 
 # Switch the pico on-board led on.
 led = Pin("LED", Pin.OUT)
@@ -25,4 +30,10 @@ reading = sensor_temp.read_u16() * conversion_factor
 # Typically, Vbe = 0.706V at 27 degrees C, with a slope of -1.721mV (0.001721) per degree.
 temperature = 27 - (reading - 0.706)/0.001721
 print("Temperature:", temperature, "°C")
-print("Machine ID:", machine.unique_id())
+print("Board ID:", machine.unique_id())
+print("Processor:", sys.platform)
+print("MicroPython Version:", sys.version)
+print("Board Variant:", os.uname().machine)
+print("CPU Frequency:", machine.freq())
+print("Allocated RAM:", gc.mem_alloc())
+print("Free RAM: ", gc.mem_free())
