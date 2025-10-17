@@ -34,6 +34,8 @@ def print_color_blocks():
     # Standard colors
     print(''.join(f"\033[4{i}m{BLOCK}\033[0m" for i in range(8)))
 
+cause = machine.reset_cause()
+
 print("Board Variant:", os.uname().machine)
 print("Board ID:", machine.unique_id())
 print("Platform:", sys.platform)
@@ -42,6 +44,19 @@ print(f"Temperature: {temperature:.2f} °C")
 print("CPU Frequency:", machine.freq() // 1000000, "MHz")
 print(f"Allocated RAM: {gc.mem_alloc() / 1024:.2f} KB")
 print(f"Free RAM: {gc.mem_free() / 1024:.2f} KB")
-print("Reset Cause:", machine.reset_cause())
+
+if cause == machine.PWRON_RESET:
+    print("Reset Cause:", "PWRON_RESET")
+elif cause == machine.WDT_RESET:
+    print("Reset Cause:", "WDT_RESET")
+elif cause == machine.DEEPSLEEP_RESET:
+    print("Reset Cause:", "DEEPSLEEP_RESET")
+elif cause == machine.SOFT_RESET:
+    print("Reset Cause:", "SOFT_RESET")
+elif cause == machine.HARD_RESET:
+    print("Reset Cause:", "HARD_RESET")
+else:
+    print("Reset Cause:", "N/A")
+
 print()
 print_color_blocks()
