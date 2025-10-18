@@ -6,6 +6,7 @@ import sys
 import os
 import micropython
 import gc
+import time
 
 # Switch the pico on-board led on.
 led = Pin("LED", Pin.OUT)
@@ -41,6 +42,7 @@ print('\033[1m' + "Serial Number:" + '\033[0m', machine.unique_id().hex())
 print('\033[1m' + "Platform:" + '\033[0m', sys.platform)
 print('\033[1m' + "Firmware Version:" + '\033[0m', sys.version)
 print(f"\033[1mTemperature:\033[0m {temperature:.2f} °C")
+print(f"\033[1mUptime:\033[0m {time.ticks_ms() / 1000:.2f}s")
 print('\033[1m' + "CPU Frequency:" + '\033[0m', machine.freq() // 1000000, "MHz")
 print(f"\033[1mAllocated RAM:\033[0m {gc.mem_alloc() / 1024:.2f} KB")
 print(f"\033[1mFree RAM:\033[0m {gc.mem_free() / 1024:.2f} KB")
