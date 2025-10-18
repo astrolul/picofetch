@@ -37,7 +37,7 @@ def print_color_blocks():
 cause = machine.reset_cause()
 
 print('\033[1m' + "Board Variant:" + '\033[0m', os.uname().machine)
-print('\033[1m' + "Board ID:" + '\033[0m', machine.unique_id())
+print('\033[1m' + "Serial Number:" + '\033[0m', machine.unique_id().hex())
 print('\033[1m' + "Platform:" + '\033[0m', sys.platform)
 print('\033[1m' + "Firmware Version:" + '\033[0m', sys.version)
 print(f"\033[1mTemperature:\033[0m {temperature:.2f} °C")
